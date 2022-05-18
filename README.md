@@ -1,3 +1,6 @@
+# Section 10: Advanced - Handling Side Effects, Using Reducers and Using the Context API
+> Going over useEffect, useReducer, and useContext in a simple Authentication application
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
