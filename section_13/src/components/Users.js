@@ -26,7 +26,7 @@ class Users extends Component {
         const usersList = (
             <ul>
                 {this.props.users.map((user) => {
-                    <User key={user.id} name={user.name} />
+                    return (<User key={user.id} name={user.name} />);
                 })}
             </ul>
         );
@@ -36,7 +36,9 @@ class Users extends Component {
                 <button onClick={this.toggleUsersHandler.bind(this)}>
                     {this.state.showUsers ? 'Hide' : 'Show'} Users
                 </button>
-                {this.state.showUsers && usersList}
+                <ul>
+                    {this.state.showUsers && usersList}
+                </ul>
             </div>
         );
     }

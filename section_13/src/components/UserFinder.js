@@ -17,7 +17,7 @@ class UserFinder extends Component {
     constructor() {
         super();
         this.state = {
-            filteredUsers: DUMMY_USERS,
+            filteredUsers: [],
             searchTerm: '',
         }
     }
@@ -28,10 +28,12 @@ class UserFinder extends Component {
     }
 
     componentDidUpdate(prevProps, prevState) {
+        // console.log(this.context.users);
         if (prevState.searchTerm !== this.state.searchTerm) {
             this.setState({
-                filteredUsers: DUMMY_USERS.filter((user) =>
-                    user.name.includes(this.state.searchTerm)),
+                filteredUsers: this.context.users.filter(user => {
+                    return user.name.includes(this.state.searchTerm);
+                }),
             });
         }
     }
