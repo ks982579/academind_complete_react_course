@@ -1,20 +1,30 @@
-import { Fragment, useState, useEffect, Component } from 'react';
+import React, { Fragment, useState, useEffect, Component } from 'react';
+import UsersContext from '../store/users-context';
 
 import Users from './Users';
 
-const DUMMY_USERS = [
-    { id: 'u1', name: 'Max' },
-    { id: 'u2', name: 'Manuel' },
-    { id: 'u3', name: 'Julie' },
-];
+import classes from "./UserFinder.module.css";
+
+// const DUMMY_USERS = [
+//     { id: 'u1', name: 'Max' },
+//     { id: 'u2', name: 'Manuel' },
+//     { id: 'u3', name: 'Julie' },
+// ];
 
 class UserFinder extends Component {
+    static contextType = UsersContext;
+
     constructor() {
         super();
         this.state = {
             filteredUsers: DUMMY_USERS,
             searchTerm: '',
         }
+    }
+
+    componentDidMount() {
+        // Send http request...
+        this.setState({ filteredUsers: this.context.users })
     }
 
     componentDidUpdate(prevProps, prevState) {
@@ -32,10 +42,12 @@ class UserFinder extends Component {
 
     render() {
         return (
-            <Fragment>
-                <input type='search' onChange={this.searchChangeHandler.bind(this)} />
+            <>
+                <div className={classes.finder}>
+                    <input type='search' onChange={this.searchChangeHandler.bind(this)} />
+                </div>
                 <Users users={this.state.filteredUsers} />
-            </Fragment>
+            </>
         );
     }
 }
