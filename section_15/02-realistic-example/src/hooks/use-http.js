@@ -1,17 +1,11 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useCallback } from 'react';
 
-const useHttp = (requestConfig, applyData) => {
-    /** Params:
-     *      requestConfig - object to configure fetch API
-     *          url - URL to send request to
-     *          method - GET or POST
-     *          headers - 
-     *          body - JS object
-     */
+const useHttp = () => {
+
     const [isLoading, setIsLoading] = useState(false);
     const [error, setError] = useState(null);
 
-    const sendRequest = async (taskText) => {
+    const sendRequest = useCallback(async (requestConfig, applyData) => {
         setIsLoading(true);
         setError(null);
         try {
@@ -34,7 +28,7 @@ const useHttp = (requestConfig, applyData) => {
             setError(err.message || 'Something went wrong!');
         }
         setIsLoading(false);
-    };
+    }, [requestConfig]);
 
     return {
         isLoading,
